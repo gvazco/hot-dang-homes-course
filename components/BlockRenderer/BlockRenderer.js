@@ -3,11 +3,22 @@ import { Cover } from "components/Cover";
 import { Heading } from "components/Heading";
 import { Paragraph } from "components/Paragraph";
 import { theme } from "theme";
+import { CallToActionButton } from "components/CallToActionButton";
 
 export const BlockRenderer = ({ blocks }) => {
   console.log(blocks);
   return blocks.map((block) => {
     switch (block.name) {
+      case "acf/ctabutton": {
+        return (
+          <CallToActionButton
+            key={block.id}
+            buttonLabel={block.attributes.data.label}
+            destination={block.attributes.data.destination}
+            align={block.attributes.data.align}
+          />
+        );
+      }
       case "core/paragraph": {
         return (
           <Paragraph
