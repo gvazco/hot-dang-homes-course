@@ -29,7 +29,8 @@ export const MainMenu = ({
               <div className="group-hover:block hidden bg-slate-800 text-right absolute right-0 top-full -mt-3">
                 {item.subMenuItems.map((subMenuItem) => (
                   <Link
-                    legacyBehavior key={subMenuItem.id}
+                    legacyBehavior
+                    key={subMenuItem.id}
                     href={subMenuItem.destination}
                   >
                     <a className="block whitespace-nowrap p-5 hover:bg-slate-700">
@@ -42,10 +43,10 @@ export const MainMenu = ({
           </div>
         ))}
         <div className="ml-3 my-auto">
-          {/* <ButtonLink
+          <ButtonLink
             destination={callToActionDestination}
             label={callToActionLabel}
-          /> */}
+          />
         </div>
       </div>
     </div>
