@@ -5,6 +5,8 @@ import { Paragraph } from "components/Paragraph";
 import { theme } from "theme";
 import { CallToActionButton } from "components/CallToActionButton";
 import { Columns } from "components/Columns";
+import { Column } from "components/Column";
+import Image from "next/image";
 
 export const BlockRenderer = ({ blocks }) => {
   console.log(blocks);
@@ -56,9 +58,46 @@ export const BlockRenderer = ({ blocks }) => {
           <Columns
             key={block.id}
             isStackedOnMobile={block.attributes.isStackedOnMobile}
+            textColor={
+              theme[block.attributes.textColor] ||
+              block.attributes.style?.color?.text
+            }
+            backgroundColor={
+              theme[block.attributes.backgroundColor] ||
+              block.attributes.style?.color?.background
+            }
           >
             <BlockRenderer blocks={block.innerBlocks} />
           </Columns>
+        );
+      }
+      case "core/column": {
+        return (
+          <Column
+            key={block.id}
+            width={block.attributes.width}
+            textColor={
+              theme[block.attributes.textColor] ||
+              block.attributes.style?.color?.text
+            }
+            backgroundColor={
+              theme[block.attributes.backgroundColor] ||
+              block.attributes.style?.color?.background
+            }
+          >
+            <BlockRenderer blocks={block.innerBlocks} />
+          </Column>
+        );
+      }
+      case "core/image": {
+        return (
+          <Image
+            key={block.id}
+            src={block.attributes.url}
+            height={block.attributes.height}
+            width={block.attributes.width}
+            alt={block.attributes.alt || ""}
+          />
         );
       }
       default: {
