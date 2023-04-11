@@ -7,6 +7,7 @@ import { CallToActionButton } from "components/CallToActionButton";
 import { Columns } from "components/Columns";
 import { Column } from "components/Column";
 import Image from "next/image";
+import { PropertySearch } from "components/PropertySearch";
 
 export const BlockRenderer = ({ blocks }) => {
   console.log(blocks);
@@ -35,6 +36,7 @@ export const BlockRenderer = ({ blocks }) => {
           />
         );
       }
+      case "core/post-title":
       case "core/heading": {
         return (
           <Heading
@@ -44,6 +46,18 @@ export const BlockRenderer = ({ blocks }) => {
             textAlign={block.attributes.textAlign}
           />
         );
+      }
+      case "core/post-title": {
+        return (
+          <PostTitle
+            key={block.id}
+            level={block.attributes.level}
+            textAlign={block.attributes.textAlign}
+          />
+        );
+      }
+      case "acf/propertysearch": {
+        return <PropertySearch key={block.id} />;
       }
       case "core/cover": {
         console.log("COVER BLOCK: ", block);

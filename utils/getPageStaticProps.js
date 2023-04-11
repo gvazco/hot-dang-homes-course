@@ -21,6 +21,23 @@ export const getPageStaticProps = async (context) => {
               }
             }
           }
+          ... on Property {
+            id
+            title
+            blocks
+            propertyFeatures {
+              bathrooms
+              bedrooms
+              hasParking
+              petFriendly
+              price
+            }
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+          }
         }
         acfOptionsMainMenu {
           mainMenu {
