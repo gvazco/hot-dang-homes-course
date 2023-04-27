@@ -8,11 +8,30 @@ import { Columns } from "components/Columns";
 import { Column } from "components/Column";
 import Image from "next/image";
 import { PropertySearch } from "components/PropertySearch";
+import { PostTitle } from "components/PostTitle";
+import { FormspreeForm } from "components/FormspreeForm";
+import { PropertyFeatures } from "components/PropertyFeatures";
 
 export const BlockRenderer = ({ blocks }) => {
   console.log(blocks);
   return blocks.map((block) => {
     switch (block.name) {
+      case "acf/propertyfeatures": {
+        console.log("Property Features: ", block.attributes);
+        return (
+          <PropertyFeatures
+            key={block.id}
+          />
+        );
+      }
+      case "acf/formspreeform": {
+        return (
+          <FormspreeForm
+            key={block.id}
+            formId={block.attributes.data.form_id}
+          />
+        );
+      }
       case "acf/ctabutton": {
         return (
           <CallToActionButton
