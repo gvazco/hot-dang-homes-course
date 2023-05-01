@@ -11,18 +11,15 @@ import { PropertySearch } from "components/PropertySearch";
 import { PostTitle } from "components/PostTitle";
 import { FormspreeForm } from "components/FormspreeForm";
 import { PropertyFeatures } from "components/PropertyFeatures";
+import { Gallery } from "components/Gallery";
+import { TickItem } from "components/TickItem";
 
 export const BlockRenderer = ({ blocks }) => {
   console.log(blocks);
   return blocks.map((block) => {
     switch (block.name) {
       case "acf/propertyfeatures": {
-        console.log("Property Features: ", block.attributes);
-        return (
-          <PropertyFeatures
-            key={block.id}
-          />
-        );
+        return <PropertyFeatures key={block.id} />;
       }
       case "acf/formspreeform": {
         return (
@@ -39,6 +36,23 @@ export const BlockRenderer = ({ blocks }) => {
             buttonLabel={block.attributes.data.label}
             destination={block.attributes.data.destination}
             align={block.attributes.data.align}
+          />
+        );
+      }
+      case "acf/tickitem": {
+        return (
+          <TickItem key={block.id}>
+            <BlockRenderer blocks={block.innerBlocks} />
+          </TickItem>
+        );
+      }
+      case "core/gallery": {
+        return (
+          <Gallery
+            key={block.id}
+            columns={block.attributes.columns || 3}
+            cropImages={block.attributes.imageCrop}
+            items={block.innerBlocks}
           />
         );
       }
